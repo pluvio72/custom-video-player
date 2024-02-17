@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ProgressBar from './ProgressBar';
+import BottomControls from './BottomControls';
 
 const Wrapper = styled.div<{ info: DOMRect }>`
   height: ${props => props.info.height}px;
   width: ${props => props.info.width}px;
   left: ${props => props.info.left}px;
-  position: absolute;
-  display: flex;
   flex-direction: column;
   align-items: center;
+  position: absolute;
+  display: flex;
 `;
 
 const Icon = styled.img`
+  top: 50%;
   width: 32px;
   height: 32px;
   cursor: pointer;
-  margin-top: auto;
-  margin-bottom: auto;
+  position: relative;
+  transform: translateY(-50%);
+`;
+
+const TopControls = styled.div`
+  height: 100%;
+  width: 100%;
+  text-align: center;
 `;
 
 export default function PlayerControls({ videoEl }: Props) {
@@ -57,13 +64,25 @@ export default function PlayerControls({ videoEl }: Props) {
     setCurrentTime(value)
   }
 
+  const changeVolume = (newVolume: number) => {
+    videoEl.volume = newVolume;
+  }
+
   return (
-    <Wrapper info={videoEl.getBoundingClientRect()} onClick={togglePlaying}>
-      {playing ?
-        <Icon src={'images/pause-icon.png'} onClick={onPause} /> :
-        <Icon src={'images/play-icon.png'} onClick={onPlay} /> 
-      }
-      <ProgressBar progress={currentTime} duration={videoEl.duration} seekTo={seek} />
+    <Wrapper info={videoEl.getBoundingClientRect()}>
+      <TopControls onClick={togglePlaying}>
+        {playing ?
+          <Icon src={'images/pause-icon.png'} onClick={onPause} /> :
+          <Icon src={'images/play-icon.png'} onClick={onPlay} /> 
+        }
+      </TopControls>
+      <BottomControls progressBarInfo={{
+          progress: currentTime,
+          duration: videoEl.duration,
+          seekTo: seek
+        }}
+        changeVolume={changeVolume}
+      />
     </Wrapper>
   )
 }

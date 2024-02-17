@@ -4,10 +4,10 @@ import React, { ChangeEvent, MouseEvent } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 90%;
   height: 3rem;
-  position: relative;
-  margin-top: auto;
+  display: flex;
+  align-items: center;
 
   &::before,
   &::after {

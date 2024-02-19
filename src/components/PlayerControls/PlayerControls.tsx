@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { RefObject, useEffect, useState } from "react";
 import styled from "styled-components";
-import BottomControls from "./BottomControls";
+import BottomControls from "./BottomControls/BottomControls";
 import { motion } from "framer-motion";
+import screenfull from 'screenfull';
 
 const Wrapper = styled.div<{ info: DOMRect }>`
   height: ${(props) => props.info.height}px;
@@ -28,15 +29,15 @@ const TopControls = styled.div`
   text-align: center;
 `;
 
-export default function PlayerControls({ videoEl }: Props) {
-  const [playing, setPlaying] = useState(!videoEl.paused || false);
-  const [currentTime, setCurrentTime] = useState(videoEl.currentTime || 0);
+export default function PlayerControls({ videoEl, wrapperRef }: Props) {
+  const [playing, setPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(videoEl?.currentTime || 0);
   const [mouseActive, setMouseActive] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (playing) {
-        setCurrentTime(videoEl.currentTime);
+        setCurrentTime(videoEl?.currentTime || 0);
       }
     }, 1000);
 
@@ -60,6 +61,10 @@ export default function PlayerControls({ videoEl }: Props) {
     }
   }, []);
 
+  if (!videoEl || !wrapperRef) {
+    return <></>
+  }
+
   const onPlay = () => {
     videoEl.play();
     setPlaying(true);
@@ -79,19 +84,22 @@ export default function PlayerControls({ videoEl }: Props) {
   };
 
   const seek = (value: number) => {
-    videoEl.fastSeek(value);
+    videoEl.currentTime = value;
     setCurrentTime(value);
   };
 
-  const changeVolume = (newVolume: number) => {
-    videoEl.volume = newVolume;
-  };
+  const changeVolume = (newVolume: number) => videoEl.volume = newVolume;
+
+  const toggleFullscreen = () => {
+    if (screenfull.isEnabled) {
+      screenfull.request();
+    }
+  }
 
   return (
     <motion.div
       animate={{ opacity: mouseActive ? 1 : 0 }}
       style={{ opacity: 0 }}
-      // onMouseMove={animateControls}
     >
       <Wrapper info={videoEl.getBoundingClientRect()} className="playerControls">
         <TopControls onClick={togglePlaying}>
@@ -108,6 +116,7 @@ export default function PlayerControls({ videoEl }: Props) {
             seekTo: seek,
           }}
           changeVolume={changeVolume}
+          toggleFullscreen={toggleFullscreen}
         />
       </Wrapper>
     </motion.div>
@@ -115,5 +124,6 @@ export default function PlayerControls({ videoEl }: Props) {
 }
 
 interface Props {
-  videoEl: HTMLVideoElement;
+  videoEl?: HTMLVideoElement;
+  wrapperRef?: RefObject<HTMLDivElement>;
 }

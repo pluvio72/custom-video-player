@@ -10,6 +10,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
 `;
 
 const Icon = styled.img`

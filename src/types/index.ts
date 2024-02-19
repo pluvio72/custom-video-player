@@ -12,7 +12,7 @@ export enum VideoTypes {
 }
 
 export type PlayerProps = {
-  accentColor?: Required<HTMLAttributes<HTMLElement>["color"]>;
+  accentColor?: string;
   bottomPlayIcon?: ReactNode;
   height?: number;
   src: string | undefined;

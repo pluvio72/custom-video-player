@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import PlayerControls from "./PlayerControls/PlayerControls";
 import styled from "styled-components";
 import { PlayerProps } from "../types";
@@ -13,10 +13,6 @@ export function Player({
 }: PlayerProps) {
   const playerRef = useRef<HTMLVideoElement>(null);
   const playerWrapperRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-
-  }, [])
 
   return (
     <PlayerContextProvider state={{ accentColor }}>

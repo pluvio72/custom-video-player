@@ -8,7 +8,7 @@ export const DefaultPlayerState = {
   setState: () => {},
 };
 
-const PContext = createContext<PlayerContext>(DefaultPlayerState);
+export const PContext = createContext<PlayerContext>(DefaultPlayerState);
 
 export function PlayerContextProvider({
   state,

@@ -1,7 +1,52 @@
 import "./VolumeSlider.css";
 
-import React, { ChangeEvent, useState } from "react";
+import { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { usePlayerContext } from "../../../../hooks/usePlayerContext";
+import { PContext } from "../../../../context/PlayerContext";
+
+export default function VolumeSlider({ changeVolume }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const { state } = usePlayerContext(PContext);
+
+  useLayoutEffect(() => {
+    if (inputRef.current) {
+      if (state.accentColor) {
+        inputRef.current.style.color = state.accentColor;
+      }
+    }
+  }, [inputRef])
+
+  const showSlider = () => setShowVolumeSlider(true);
+  const hideSlider = () => setShowVolumeSlider(false);
+
+  const setVolume = (e: ChangeEvent<HTMLInputElement>) => {
+    changeVolume(Number(e.currentTarget.value));
+  };
+
+  return (
+    <Wrapper onMouseOver={showSlider} onMouseOut={hideSlider}>
+      <SliderWrapper>
+        <input
+          ref={inputRef}
+          className="sliderInput volumeSlider"
+          type="range"
+          onChange={setVolume}
+          min={"0"}
+          max={"1"}
+          step={"0.01"}
+          style={{ display: showVolumeSlider ? 'block' : 'none' }}
+        />
+      </SliderWrapper>
+      <Icon src={"images/volume-icon.png"} />
+    </Wrapper>
+  );
+}
+
+interface Props {
+  changeVolume: (newVol: number) => void;
+}
 
 const Wrapper = styled.div`
   margin-left: 1rem;
@@ -22,36 +67,3 @@ const SliderWrapper = styled.div`
   position: absolute;
   bottom: 2rem;
 `;
-
-export default function VolumeSlider({ changeVolume }: Props) {
-  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
-
-  const showSlider = () => setShowVolumeSlider(true);
-  const hideSlider = () => setShowVolumeSlider(false);
-
-  const setVolume = (e: ChangeEvent<HTMLInputElement>) => {
-    changeVolume(Number(e.currentTarget.value));
-  };
-
-  return (
-    <Wrapper onMouseOver={showSlider} onMouseOut={hideSlider}>
-      {showVolumeSlider && (
-        <SliderWrapper>
-          <input
-            className="sliderInput volumeSlider"
-            type="range"
-            onChange={setVolume}
-            min={"0"}
-            max={"1"}
-            step={"0.01"}
-          />
-        </SliderWrapper>
-      )}
-      <Icon src={"images/volume-icon.png"} />
-    </Wrapper>
-  );
-}
-
-interface Props {
-  changeVolume: (newVol: number) => void;
-}

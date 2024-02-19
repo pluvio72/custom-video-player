@@ -1,6 +1,6 @@
 import "./ProgressBar.css";
 
-import React, { ChangeEvent, MouseEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -25,10 +25,6 @@ const Wrapper = styled.div`
 `;
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
-  const onClick = (e: MouseEvent<HTMLInputElement>) => {
-    // console.log(e.currentTarget.value)
-  }
-
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     seekTo(Number(e.currentTarget.value))
   }
@@ -41,7 +37,6 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         min="0"
         max={duration.toString()}
         value={progress}
-        onClick={onClick}
         onChange={onChange}
       />
     </Wrapper>

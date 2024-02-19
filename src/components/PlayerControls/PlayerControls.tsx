@@ -4,9 +4,11 @@ import BottomControls from "./BottomControls/BottomControls";
 import { motion } from "framer-motion";
 import screenfull from "screenfull";
 import TopControls from "./BottomControls/TopControls";
-import { VideoDimensionInfo } from "../../types";
+import { PlayerProps, VideoDimensionInfo } from "../../types";
 
-export default function PlayerControls({ videoEl, wrapperRef }: Props) {
+export default function PlayerControls({ playerRef, wrapperRef }: Props) {
+  const videoEl = playerRef?.current;
+
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(videoEl?.currentTime || 0);
   const [mouseActive, setMouseActive] = useState(false);
@@ -115,7 +117,7 @@ export default function PlayerControls({ videoEl, wrapperRef }: Props) {
 }
 
 interface Props {
-  videoEl?: HTMLVideoElement;
+  playerRef?: RefObject<HTMLVideoElement>;
   wrapperRef?: RefObject<HTMLDivElement>;
 }
 

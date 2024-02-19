@@ -1,27 +1,35 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import PlayerControls from "./PlayerControls/PlayerControls";
 import styled from "styled-components";
+import { PlayerProps } from "../types";
+import { PlayerContextProvider } from "../context/PlayerContext";
 
-export function Player() {
+export function Player({
+  accentColor,
+  height,
+  src,
+  videoType,
+  width,
+}: PlayerProps) {
   const playerRef = useRef<HTMLVideoElement>(null);
   const playerWrapperRef = useRef<HTMLDivElement>(null);
-  const [videoEl, setVideoEl] = useState<HTMLVideoElement>();
-  
 
-  useEffect(() => {
-    if (playerRef.current) {
-      playerRef.current.volume = 0.1;
-      setVideoEl(playerRef.current);
-    }
-  }, [playerRef]);  
+  useLayoutEffect(() => {
+
+  }, [])
 
   return (
-    <Wrapper ref={playerWrapperRef}>
-      <PlayerControls videoEl={videoEl} wrapperRef={playerWrapperRef} />
-      <Video ref={playerRef}>
-        <source src="adventure_time_s1ep4.mp4" type="video/mp4" />
-      </Video>
-    </Wrapper>
+    <PlayerContextProvider state={{ accentColor }}>
+      <Wrapper ref={playerWrapperRef}>
+        <PlayerControls
+          playerRef={playerRef}
+          wrapperRef={playerWrapperRef}
+        />
+        <Video ref={playerRef} width={width} height={height}>
+          <source src={src} type={videoType} />
+        </Video>
+      </Wrapper>
+    </PlayerContextProvider>
   );
 }
 

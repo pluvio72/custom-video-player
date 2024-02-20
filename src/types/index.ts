@@ -1,10 +1,8 @@
-import { HTMLAttributes, ReactNode } from "react";
+import React, { HTMLAttributes, ReactNode } from "react";
 
 export type VideoDimensionInfo = {
   width: number;
   height: number;
-  left: number;
-  top: number;
 };
 
 export enum VideoTypes {
@@ -30,6 +28,9 @@ export type PlayerProps = {
 export type PlayerContext = {
   state: {
     accentColor?: PlayerProps['accentColor'];
+    duration: number;
+    viewportWidth: number;
+    viewportHeight: number;
   },
-  setState: (key: any) => void;
+  setState: React.Dispatch<React.SetStateAction<PlayerContext['state']>>;
 }

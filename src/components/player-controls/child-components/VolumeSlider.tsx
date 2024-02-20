@@ -2,8 +2,8 @@ import "./VolumeSlider.css";
 
 import { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { usePlayerContext } from "../../../../hooks/usePlayerContext";
-import { PContext } from "../../../../context/PlayerContext";
+import { usePlayerContext } from "../../../hooks/usePlayerContext";
+import { PContext } from "../../../context/PlayerContext";
 
 export default function VolumeSlider({ changeVolume }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);

@@ -2,13 +2,14 @@ import "./ProgressBar.css";
 
 import { ChangeEvent, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
-import { usePlayerContext } from "../../../../hooks/usePlayerContext";
-import { PContext } from "../../../../context/PlayerContext";
+import { usePlayerContext } from "../../../hooks/usePlayerContext";
+import { PContext } from "../../../context/PlayerContext";
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const { state } = usePlayerContext(PContext)
-
+  // console.log("STATE:", state)
+  
   useLayoutEffect(() => {
     if (inputRef.current) {
       if (state.accentColor) {

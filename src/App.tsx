@@ -1,7 +1,6 @@
 import './App.css';
 
-import React from 'react';
-import { Player } from './components/Player';
+import { Player } from './components/PlayerWrapper';
 import { VideoTypes } from './types';
 
 function App() {

@@ -35,7 +35,7 @@ export default function PlayerControls({
       timeoutId = setTimeout(() => setMouseActive(false), 2000);
     };
 
-    document.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);

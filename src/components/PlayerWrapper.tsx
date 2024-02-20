@@ -7,6 +7,7 @@ const PlayerWrapper = (props: PlayerProps) => (
     state={{
       accentColor: props.accentColor,
       duration: 0,
+      style: props.style,
       viewportHeight: 0,
       viewportWidth: 0,
     }}

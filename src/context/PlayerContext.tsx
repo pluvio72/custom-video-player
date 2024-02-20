@@ -1,10 +1,11 @@
 import React, { PropsWithChildren, createContext, useState } from "react";
-import type { PlayerContext } from "../types";
+import { VideoPlayerStyles, type PlayerContext } from "../types";
 
 export const DefaultPlayerState = {
   state: {
     accentColor: "orange",
     duration: 0,
+    style: VideoPlayerStyles.one,
     viewportWidth: 0,
     viewportHeight: 0,
   },

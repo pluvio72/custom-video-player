@@ -17,7 +17,6 @@ import TopControls from "./player-controls/TopControls";
 
 export function Player({
   height,
-  style,
   src,
   videoType,
   width,

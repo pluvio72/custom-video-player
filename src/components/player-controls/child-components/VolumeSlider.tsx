@@ -4,6 +4,7 @@ import { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { usePlayerContext } from "../../../hooks/usePlayerContext";
 import { PContext } from "../../../context/PlayerContext";
+import { getSliderClassName } from "../../../util/style";
 
 export default function VolumeSlider({ changeVolume }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +31,7 @@ export default function VolumeSlider({ changeVolume }: Props) {
       <SliderWrapper>
         <input
           ref={inputRef}
-          className="sliderInput volumeSlider"
+          className={`volumeSlider ${getSliderClassName(state.style)}`}
           type="range"
           onChange={setVolume}
           min={"0"}

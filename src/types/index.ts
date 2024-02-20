@@ -10,8 +10,9 @@ export enum VideoTypes {
 }
 
 export enum VideoPlayerStyles {
-  simple = 1,
-  extravagent = 1,
+  'one' = 1,
+  'two' = 2,
+  'three' = 3,
 }
 
 export type PlayerProps = {
@@ -42,6 +43,7 @@ export type PlayerContext = {
     duration: number;
     viewportWidth: number;
     viewportHeight: number;
+    style: VideoPlayerStyles;
   };
   setState: React.Dispatch<React.SetStateAction<PlayerContext["state"]>>;
 };

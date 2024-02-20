@@ -4,6 +4,8 @@ import { ChangeEvent, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import { usePlayerContext } from "../../../hooks/usePlayerContext";
 import { PContext } from "../../../context/PlayerContext";
+import { VideoPlayerStyles } from "../../../types";
+import { getSliderClassName } from "../../../util/style";
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -21,7 +23,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
     <Wrapper>
       <input
         ref={inputRef}
-        className="sliderInput"
+        className={getSliderClassName(state.style)}
         type="range"
         min="0"
         max={duration.toString()}

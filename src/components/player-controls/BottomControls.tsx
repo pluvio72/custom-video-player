@@ -1,8 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 import ProgressBar from './child-components/ProgressBar';
 import VolumeSlider from './child-components/VolumeSlider';
 import FullscreenIcon from './child-components/FullScreenIcon';
+import { PlayerProps } from '../../types';
+import { usePlayerContext } from '../../hooks/usePlayerContext';
+import { PContext } from '../../context/PlayerContext';
+import { ChangeEvent } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,10 +17,16 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export default function BottomControls({ progressBarInfo, changeVolume, toggleFullscreen }: Props) {
+export default function BottomControls({ progress, bottomControls, seekTo, changeVolume, toggleFullscreen }: Props) {
+  const { state } = usePlayerContext(PContext);
+
+  if (bottomControls) {
+    return bottomControls(progress, state.duration, seekTo, changeVolume)
+  }
+  
   return (
     <Wrapper>
-      <ProgressBar duration={progressBarInfo.duration} progress={progressBarInfo.progress} seekTo={progressBarInfo.seekTo} />
+      <ProgressBar duration={state.duration} progress={progress} seekTo={seekTo} />
       <VolumeSlider changeVolume={changeVolume} />
       <FullscreenIcon toggleFullscreen={toggleFullscreen} />
     </Wrapper>
@@ -25,11 +34,9 @@ export default function BottomControls({ progressBarInfo, changeVolume, toggleFu
 }
 
 interface Props {
-  progressBarInfo: {
-    progress: number;
-    duration: number;
-    seekTo: (value: number) => void;
-  }
+  progress: number;
+  bottomControls: PlayerProps['bottomControls'];
   changeVolume: (newVol: number) => void;
+  seekTo: (e: ChangeEvent<HTMLInputElement>) => void;
   toggleFullscreen: () => void;
 }

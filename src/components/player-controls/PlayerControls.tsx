@@ -2,7 +2,6 @@ import {
   PropsWithChildren,
   RefObject,
   useEffect,
-  useLayoutEffect,
   useState,
 } from "react";
 import styled from "styled-components";
@@ -26,6 +25,7 @@ export default function PlayerControls({
     width: state.viewportWidth,
   });
 
+  // EVENT (mousemove): handling animating controls in/out
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
@@ -43,6 +43,7 @@ export default function PlayerControls({
     };
   }, []);
 
+  // EVENT (resize): handling reszing viewport
   useEffect(() => {
     if (!videoEl) return;
 
@@ -54,6 +55,13 @@ export default function PlayerControls({
     return () => window.removeEventListener("resize", handleResize);
   }, [videoEl]);
 
+  useEffect(() => {
+    setVideoDimensions({
+      height: state.viewportHeight,
+      width: state.viewportWidth
+    })
+  }, [state.viewportHeight, state.viewportWidth]);
+
   const setDimensions = (el: HTMLVideoElement) => {
     const boundingRect = el.getBoundingClientRect();
 
@@ -63,13 +71,6 @@ export default function PlayerControls({
       viewportWidth: boundingRect.width,
     }))
   }
-
-  useEffect(() => {
-    setVideoDimensions({
-      height: state.viewportHeight,
-      width: state.viewportWidth
-    })
-  }, [state.viewportHeight, state.viewportWidth]);
 
   if (!videoEl || !wrapperRef) {
     return <></>;

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, ReactNode } from "react";
+import React, { ChangeEvent, HTMLAttributes, ReactNode } from "react";
 
 export type VideoDimensionInfo = {
   width: number;
@@ -9,28 +9,39 @@ export enum VideoTypes {
   mp4 = "video/mp4",
 }
 
+export enum VideoPlayerStyles {
+  simple = 1,
+  extravagent = 1,
+}
+
 export type PlayerProps = {
   accentColor?: string;
   bottomPlayIcon?: ReactNode;
   height?: number;
   src: string | undefined;
+  style: VideoPlayerStyles;
   videoType: VideoTypes;
   volumeIcon?: ReactNode;
   width?: number;
-  seekBar?: (
+  bottomControls?: (
     progress: number,
     duration: number,
-    seekTo: (timestamp: number) => void
-  ) => ReactNode;
-  volumeSlider?: (changeVolume: (newVolume: number) => void) => ReactNode;
+    seekTo: (e: ChangeEvent<HTMLInputElement>) => void,
+    changeVolume: (newVolume: number) => void
+  ) => JSX.Element;
+  midControls?: (
+    playing: boolean,
+    togglePlayState: () => void,
+  ) => JSX.Element;
+  topControls?: () => JSX.Element;
 };
 
 export type PlayerContext = {
   state: {
-    accentColor?: PlayerProps['accentColor'];
+    accentColor?: PlayerProps["accentColor"];
     duration: number;
     viewportWidth: number;
     viewportHeight: number;
-  },
-  setState: React.Dispatch<React.SetStateAction<PlayerContext['state']>>;
-}
+  };
+  setState: React.Dispatch<React.SetStateAction<PlayerContext["state"]>>;
+};

@@ -8,7 +8,6 @@ import { PContext } from "../../../context/PlayerContext";
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const { state } = usePlayerContext(PContext)
-  // console.log("STATE:", state)
   
   useLayoutEffect(() => {
     if (inputRef.current) {
@@ -17,10 +16,6 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
       }
     }
   }, [inputRef])
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    seekTo(Number(e.currentTarget.value))
-  }
 
   return (
     <Wrapper>
@@ -31,7 +26,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         min="0"
         max={duration.toString()}
         value={progress}
-        onChange={onChange}
+        onChange={seekTo}
       />
     </Wrapper>
   );
@@ -40,7 +35,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
 interface Props {
   duration: number;
   progress: number;
-  seekTo: (value: number) => void;
+  seekTo: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Wrapper = styled.div`

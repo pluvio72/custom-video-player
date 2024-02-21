@@ -30,8 +30,9 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
     if (inputRef.current) {
       let percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft);
       let max = parseInt(inputRef.current.max)
-      setLabelTimestamp(Math.floor(percents * max + 0.5))
-      setLabelOffset(inputRef.current.clientWidth - (e.clientX - inputRef.current.offsetLeft) + 24)
+      setLabelTimestamp(Math.floor(percents * max))
+      setLabelOffset((e.clientX - inputRef.current.offsetLeft) - 24)
+      // console.log("Percents:", percents, "Max:", max)
     }
   }
 
@@ -51,7 +52,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         onMouseOut={hideTooltip}
       />
       <TooptipWrapper $show={!!labelOffset}>
-        <Tooltip style={{ right: labelOffset }} >
+        <Tooltip $offset={labelOffset} >
           <TooltipText>{labelTimestamp}</TooltipText>
         </Tooltip>
       </TooptipWrapper>
@@ -86,12 +87,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const TooptipWrapper = styled.output<{ $show: boolean }>`
-  position: relative;
-  display: ${props => props.$show ? 'block' : 'none'}
+const TooptipWrapper = styled.div<{ $show: boolean }>`
+  position: absolute;
+  pointer-events: none;
+  display: ${props => props.$show ? 'block' : 'none'};
 `;
 
-const Tooltip = styled.div`
+const Tooltip = styled.div<{ $offset: number | undefined }>`
   background: #fff;
   border-radius: 5px;
   padding: 5px 10px;
@@ -100,6 +102,7 @@ const Tooltip = styled.div`
   font-size: 0.8rem;
   max-width: 140px;
   bottom: 26px;
+  right: ${props => props.$offset ? -props.$offset : 0}px;
 `;
 
 const TooltipText = styled.span`

@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { usePlayerContext } from "../../../hooks/usePlayerContext";
 import { PContext } from "../../../context/PlayerContext";
 import { getSliderClassName } from "../../../util/style";
+import { secondsToTimestamp } from "../../../util/time";
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +54,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
       />
       <TooptipWrapper $show={!!labelOffset}>
         <Tooltip $offset={labelOffset} >
-          <TooltipText>{labelTimestamp}</TooltipText>
+          <TooltipText>{secondsToTimestamp(labelTimestamp)}</TooltipText>
         </Tooltip>
       </TooptipWrapper>
     </Wrapper>

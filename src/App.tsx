@@ -9,7 +9,7 @@ function App() {
       <Player
         src="adventure_time_s1ep4.mp4"
         videoType={VideoTypes.mp4}
-        style={VideoPlayerStyles.three}
+        style={VideoPlayerStyles.one}
         // bottomControls={(progress, duration, seekTo, changeVolume) => {
         //   return (
         //     <div>

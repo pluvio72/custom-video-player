@@ -6,8 +6,6 @@ export const getSliderClassName = (style: VideoPlayerStyles) => {
       return 'input-slider-1';
     case VideoPlayerStyles.two:
       return 'input-slider-2';
-    case VideoPlayerStyles.three:
-      return 'input-slider-3';
     default:
       return 'input-slider-1';
   }

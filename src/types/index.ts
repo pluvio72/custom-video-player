@@ -12,7 +12,6 @@ export enum VideoTypes {
 export enum VideoPlayerStyles {
   'one' = 1,
   'two' = 2,
-  'three' = 3,
 }
 
 export type PlayerProps = {

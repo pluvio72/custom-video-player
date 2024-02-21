@@ -19,7 +19,7 @@ export default function PlayerControls({
 
   const { state, setState } = usePlayerContext(PContext);
 
-  const [mouseActive, setMouseActive] = useState(false);
+  const [mouseActive, setMouseActive] = useState(true);
   const [videoDimensions, setVideoDimensions] = useState<VideoDimensionInfo>({
     height: state.viewportHeight,
     width: state.viewportWidth,
@@ -35,7 +35,7 @@ export default function PlayerControls({
       timeoutId = setTimeout(() => setMouseActive(false), 2000);
     };
 
-    document.body.addEventListener("mousemove", handleMouseMove);
+    // document.body.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);

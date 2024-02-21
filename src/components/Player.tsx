@@ -37,7 +37,7 @@ export function Player({
   useEffect(() => {
     const interval = setInterval(() => {
       if (playing) {
-        setCurrentTime(playerRef.current?.currentTime || 0);
+        setCurrentTime(Math.floor(playerRef.current?.currentTime || 0));
       }
     }, 1000);
 

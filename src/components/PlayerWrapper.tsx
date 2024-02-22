@@ -8,6 +8,7 @@ const PlayerWrapper = (props: PlayerProps) => (
       accentColor: props.accentColor,
       currentVolume: 1,
       duration: 0,
+      isFullscreen: false,
       style: props.style,
       previousVolume: 1,
       viewportHeight: 0,

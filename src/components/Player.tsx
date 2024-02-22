@@ -99,7 +99,19 @@ export function Player({
 
   const toggleFullscreen = () => {
     if (screenfull.isEnabled) {
-      screenfull.request()
+      let isFullscreen = false
+
+      if (screenfull.isFullscreen) {
+        screenfull.exit()
+      } else {
+        screenfull.request()
+        isFullscreen = true
+      }
+
+      setState((prev) => ({
+        ...prev,
+        isFullscreen,
+      }))
     }
   }
 
@@ -118,7 +130,7 @@ export function Player({
   }
 
   return (
-    <Wrapper ref={playerWrapperRef} id='player'>
+    <Wrapper ref={playerWrapperRef} id='player' $isFullscreen={state.isFullscreen}>
       <PlayerControls playerRef={playerRef} wrapperRef={playerWrapperRef}>
         <TopControls topControls={topControls} />
         <MidControls midControls={midControls} playing={playing} togglePlayState={togglePlaying} />
@@ -138,8 +150,12 @@ export function Player({
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $isFullscreen: boolean }>`
   width: 100%;
+  height: ${(props) => (props.$isFullscreen ? '100vh' : '')};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Video = styled.video`

@@ -40,6 +40,7 @@ export type PlayerContext = {
     accentColor?: PlayerProps['accentColor']
     currentVolume: number
     duration: number
+    isFullscreen: boolean
     previousVolume: number
     viewportWidth: number
     viewportHeight: number

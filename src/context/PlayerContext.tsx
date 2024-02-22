@@ -1,11 +1,12 @@
 import React, { PropsWithChildren, createContext, useState } from 'react'
 import { VideoPlayerStyles, type PlayerContext } from '../types'
 
-export const DefaultPlayerState = {
+export const DefaultPlayerState: PlayerContext = {
   state: {
     accentColor: 'orange',
     currentVolume: 1,
     duration: 0,
+    isFullscreen: false,
     style: VideoPlayerStyles.one,
     previousVolume: 0,
     viewportWidth: 0,

@@ -9,6 +9,7 @@ export const DefaultPlayerState = {
     viewportWidth: 0,
     viewportHeight: 0,
   },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setState: () => {},
 }
 

@@ -14,7 +14,7 @@ export default function PlayerControls({
 
   const { state, setState } = usePlayerContext(PContext)
 
-  const [mouseActive, setMouseActive] = useState(true)
+  const [mouseActive, setMouseActive] = useState(false)
   const [videoDimensions, setVideoDimensions] = useState<VideoDimensionInfo>({
     height: state.viewportHeight,
     width: state.viewportWidth,
@@ -30,7 +30,7 @@ export default function PlayerControls({
       timeoutId = setTimeout(() => setMouseActive(false), 2000)
     }
 
-    // document.body.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener('mousemove', handleMouseMove)
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
@@ -72,11 +72,18 @@ export default function PlayerControls({
   }
 
   return (
-    <motion.div animate={{ opacity: mouseActive ? 1 : 0 }} style={{ opacity: 0 }}>
-      <Wrapper $dimensions={videoDimensions} className='playerControls'>
-        {children}
-      </Wrapper>
-    </motion.div>
+    <Wrapper
+      animate={{
+        background: mouseActive
+          ? 'linear-gradient(0deg,rgba(0, 0, 0, 0.65) 0%,rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%,rgba(0, 0, 0, 0.65) 100%)'
+          : '',
+        opacity: mouseActive ? 1 : 0,
+      }}
+      $dimensions={videoDimensions}
+      className='playerControls'
+    >
+      {children}
+    </Wrapper>
   )
 }
 
@@ -85,7 +92,7 @@ type Props = {
   wrapperRef?: RefObject<HTMLDivElement>
 }
 
-const Wrapper = styled.div<{ $dimensions: VideoDimensionInfo }>`
+const Wrapper = styled(motion.div)<{ $dimensions: VideoDimensionInfo }>`
   height: ${(props) => props.$dimensions.height}px;
   width: ${(props) => props.$dimensions.width}px;
   flex-direction: column;

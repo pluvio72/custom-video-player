@@ -23,8 +23,8 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
 
   const showTooltip = (e: MouseEvent<HTMLInputElement>) => {
     if (inputRef.current) {
-      let percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft)
-      let max = parseInt(inputRef.current.max)
+      const percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft)
+      const max = parseInt(inputRef.current.max)
       setLabelTimestamp(Math.floor(percents * max))
       setLabelOffset(e.clientX - inputRef.current.offsetLeft - 24)
     }

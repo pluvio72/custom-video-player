@@ -2,7 +2,8 @@
   "name": "custom-react-player",
   "description": "Customizable react video player",
   "version": "0.1.0",
-  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
   "dependencies": {
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
@@ -17,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "",
+    "build": "rollup -c",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{ts,tsx}",
@@ -46,6 +47,9 @@
     ]
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "eslint": "^8.56.0",
@@ -55,6 +59,9 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2"
   }
 }

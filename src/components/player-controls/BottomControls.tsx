@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ProgressBar from './child-components/ProgressBar';
+import ProgressBar from './child-components/Scrubber';
 import VolumeSlider from './child-components/VolumeSlider';
 import FullscreenIcon from './child-components/FullScreenIcon';
 import { PlayerProps } from '../../types';

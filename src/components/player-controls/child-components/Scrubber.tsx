@@ -1,4 +1,4 @@
-import "./ProgressBar.css";
+import "./Scrubber.css";
 
 import {
   ChangeEvent,
@@ -12,6 +12,7 @@ import { usePlayerContext } from "../../../hooks/usePlayerContext";
 import { PContext } from "../../../context/PlayerContext";
 import { getSliderClassName } from "../../../util/style";
 import { secondsToTimestamp } from "../../../util/time";
+import { motion } from "framer-motion";
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -25,7 +26,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         inputRef.current.style.color = state.accentColor;
       }
     }
-  }, [inputRef]);
+  }, [inputRef, state.accentColor]);
 
   const showTooltip = (e: MouseEvent<HTMLInputElement>) => {
     if (inputRef.current) {
@@ -33,7 +34,6 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
       let max = parseInt(inputRef.current.max)
       setLabelTimestamp(Math.floor(percents * max))
       setLabelOffset((e.clientX - inputRef.current.offsetLeft) - 24)
-      // console.log("Percents:", percents, "Max:", max)
     }
   }
 
@@ -41,7 +41,8 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
 
   return (
     <Wrapper>
-      <input
+      <motion.input
+        whileHover={state.style === 2 ? { scaleY: 2 } : undefined}
         ref={inputRef}
         className={getSliderClassName(state.style)}
         type="range"

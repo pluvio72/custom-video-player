@@ -100,4 +100,5 @@ const Wrapper = styled.div<{ $dimensions: VideoDimensionInfo }>`
   align-items: center;
   position: absolute;
   display: flex;
+  z-index: 10;
 `;

@@ -28,6 +28,8 @@ export type PlayerProps = {
     duration: number,
     seekTo: (e: ChangeEvent<HTMLInputElement>) => void,
     changeVolume: (newVolume: number) => void,
+    toggleFullscreen: () => void,
+    toggleMute: () => void,
   ) => JSX.Element
   midControls?: (playing: boolean, togglePlayState: () => void) => JSX.Element
   topControls?: () => JSX.Element

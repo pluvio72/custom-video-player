@@ -28,7 +28,14 @@ export default function BottomControls({
   const { state } = usePlayerContext(PContext)
 
   if (bottomControls) {
-    return bottomControls(progress, state.duration, seekTo, changeVolume)
+    return bottomControls(
+      progress,
+      state.duration,
+      seekTo,
+      changeVolume,
+      toggleFullscreen,
+      toggleMute,
+    )
   }
 
   return (

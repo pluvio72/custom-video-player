@@ -1,6 +1,6 @@
-import { PlayerContextProvider } from "../context/PlayerContext";
-import { PlayerProps } from "../types";
-import { Player } from "./Player";
+import { PlayerContextProvider } from '../context/PlayerContext'
+import { PlayerProps } from '../types'
+import { Player } from './Player'
 
 const PlayerWrapper = (props: PlayerProps) => (
   <PlayerContextProvider
@@ -14,6 +14,6 @@ const PlayerWrapper = (props: PlayerProps) => (
   >
     <Player {...props} />
   </PlayerContextProvider>
-);
+)
 
-export { PlayerWrapper as Player };
+export { PlayerWrapper as Player }

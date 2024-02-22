@@ -1,50 +1,44 @@
-import "./Scrubber.css";
+import './Scrubber.css'
 
-import {
-  ChangeEvent,
-  MouseEvent,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import styled from "styled-components";
-import { usePlayerContext } from "../../../hooks/usePlayerContext";
-import { PContext } from "../../../context/PlayerContext";
-import { getSliderClassName } from "../../../util/style";
-import { secondsToTimestamp } from "../../../util/time";
+import { ChangeEvent, MouseEvent, useLayoutEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
+import { usePlayerContext } from '../../../hooks/usePlayerContext'
+import { PContext } from '../../../context/PlayerContext'
+import { getSliderClassName } from '../../../util/style'
+import { secondsToTimestamp } from '../../../util/time'
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { state } = usePlayerContext(PContext);
-  const [labelOffset, setLabelOffset] = useState<number>();
-  const [labelTimestamp, setLabelTimestamp] = useState<number>(0);
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { state } = usePlayerContext(PContext)
+  const [labelOffset, setLabelOffset] = useState<number>()
+  const [labelTimestamp, setLabelTimestamp] = useState<number>(0)
 
   useLayoutEffect(() => {
     if (inputRef.current) {
       if (state.accentColor) {
-        inputRef.current.style.color = state.accentColor;
+        inputRef.current.style.color = state.accentColor
       }
     }
-  }, [inputRef, state.accentColor]);
+  }, [inputRef, state.accentColor])
 
   const showTooltip = (e: MouseEvent<HTMLInputElement>) => {
     if (inputRef.current) {
-      let percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft);
+      let percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft)
       let max = parseInt(inputRef.current.max)
       setLabelTimestamp(Math.floor(percents * max))
-      setLabelOffset((e.clientX - inputRef.current.offsetLeft) - 24)
+      setLabelOffset(e.clientX - inputRef.current.offsetLeft - 24)
     }
   }
 
-  const hideTooltip = () => setLabelOffset(undefined);
+  const hideTooltip = () => setLabelOffset(undefined)
 
   return (
     <Wrapper>
       <input
         ref={inputRef}
         className={getSliderClassName(state.style)}
-        type="range"
-        min="0"
+        type='range'
+        min='0'
         max={duration.toString()}
         value={progress}
         onChange={seekTo}
@@ -52,18 +46,18 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         onMouseOut={hideTooltip}
       />
       <TooptipWrapper $show={!!labelOffset}>
-        <Tooltip $offset={labelOffset} >
+        <Tooltip $offset={labelOffset}>
           <TooltipText>{secondsToTimestamp(labelTimestamp)}</TooltipText>
         </Tooltip>
       </TooptipWrapper>
     </Wrapper>
-  );
+  )
 }
 
 interface Props {
-  duration: number;
-  progress: number;
-  seekTo: (e: ChangeEvent<HTMLInputElement>) => void;
+  duration: number
+  progress: number
+  seekTo: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 const Wrapper = styled.div`
@@ -85,13 +79,13 @@ const Wrapper = styled.div`
     padding: 0.75rem 0;
     pointer-events: none;
   }
-`;
+`
 
 const TooptipWrapper = styled.div<{ $show: boolean }>`
   position: absolute;
   pointer-events: none;
-  display: ${props => props.$show ? 'block' : 'none'};
-`;
+  display: ${(props) => (props.$show ? 'block' : 'none')};
+`
 
 const Tooltip = styled.div<{ $offset: number | undefined }>`
   background: #fff;
@@ -102,9 +96,9 @@ const Tooltip = styled.div<{ $offset: number | undefined }>`
   font-size: 0.8rem;
   max-width: 140px;
   bottom: 26px;
-  right: ${props => props.$offset ? -props.$offset : 0}px;
-`;
+  right: ${(props) => (props.$offset ? -props.$offset : 0)}px;
+`
 
 const TooltipText = styled.span`
   font-style: italic;
-`;
+`

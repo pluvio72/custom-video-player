@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import ProgressBar from './child-components/Scrubber';
-import VolumeSlider from './child-components/VolumeSlider';
-import FullscreenIcon from './child-components/FullScreenIcon';
-import { PlayerProps } from '../../types';
-import { usePlayerContext } from '../../hooks/usePlayerContext';
-import { PContext } from '../../context/PlayerContext';
-import { ChangeEvent } from 'react';
+import styled from 'styled-components'
+import ProgressBar from './child-components/Scrubber'
+import VolumeSlider from './child-components/VolumeSlider'
+import FullscreenIcon from './child-components/FullScreenIcon'
+import { PlayerProps } from '../../types'
+import { usePlayerContext } from '../../hooks/usePlayerContext'
+import { PContext } from '../../context/PlayerContext'
+import { ChangeEvent } from 'react'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,15 +15,21 @@ const Wrapper = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
-`;
+`
 
-export default function BottomControls({ progress, bottomControls, seekTo, changeVolume, toggleFullscreen }: Props) {
-  const { state } = usePlayerContext(PContext);
+export default function BottomControls({
+  progress,
+  bottomControls,
+  seekTo,
+  changeVolume,
+  toggleFullscreen,
+}: Props) {
+  const { state } = usePlayerContext(PContext)
 
   if (bottomControls) {
     return bottomControls(progress, state.duration, seekTo, changeVolume)
   }
-  
+
   return (
     <Wrapper>
       <ProgressBar duration={state.duration} progress={progress} seekTo={seekTo} />
@@ -34,9 +40,9 @@ export default function BottomControls({ progress, bottomControls, seekTo, chang
 }
 
 interface Props {
-  progress: number;
-  bottomControls: PlayerProps['bottomControls'];
-  changeVolume: (newVol: number) => void;
-  seekTo: (e: ChangeEvent<HTMLInputElement>) => void;
-  toggleFullscreen: () => void;
+  progress: number
+  bottomControls: PlayerProps['bottomControls']
+  changeVolume: (newVol: number) => void
+  seekTo: (e: ChangeEvent<HTMLInputElement>) => void
+  toggleFullscreen: () => void
 }

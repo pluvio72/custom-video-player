@@ -6,8 +6,10 @@ const PlayerWrapper = (props: PlayerProps) => (
   <PlayerContextProvider
     state={{
       accentColor: props.accentColor,
+      currentVolume: 1,
       duration: 0,
       style: props.style,
+      previousVolume: 1,
       viewportHeight: 0,
       viewportWidth: 0,
     }}

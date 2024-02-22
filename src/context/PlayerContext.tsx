@@ -4,8 +4,10 @@ import { VideoPlayerStyles, type PlayerContext } from '../types'
 export const DefaultPlayerState = {
   state: {
     accentColor: 'orange',
+    currentVolume: 1,
     duration: 0,
     style: VideoPlayerStyles.one,
+    previousVolume: 0,
     viewportWidth: 0,
     viewportHeight: 0,
   },

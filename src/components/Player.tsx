@@ -24,7 +24,7 @@ export function Player({
   const [playing, setPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(playerRef.current?.currentTime || 0)
 
-  const { setState } = usePlayerContext(PContext)
+  const { state, setState } = usePlayerContext(PContext)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -68,6 +68,32 @@ export function Player({
   const changeVolume = (newVolume: number) => {
     if (playerRef.current) {
       playerRef.current.volume = newVolume
+      setState((prev) => ({
+        ...prev,
+        currentVolume: newVolume,
+      }))
+
+      if (newVolume > 0) {
+        setState((prev) => ({
+          ...prev,
+          previousVolume: newVolume,
+        }))
+      }
+    }
+  }
+
+  const toggleMute = () => {
+    if (playerRef.current) {
+      let newVolume: number
+      if (state.currentVolume > 0) {
+        newVolume = 0
+      } else {
+        newVolume = state.previousVolume
+      }
+      setState((prev) => ({
+        ...prev,
+        currentVolume: newVolume,
+      }))
     }
   }
 
@@ -102,6 +128,7 @@ export function Player({
           seekTo={seek}
           changeVolume={changeVolume}
           toggleFullscreen={toggleFullscreen}
+          toggleMute={toggleMute}
         />
       </PlayerControls>
       <Video ref={playerRef} width={width} height={height} onLoadedMetadata={onLoad}>

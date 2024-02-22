@@ -23,6 +23,7 @@ export default function BottomControls({
   seekTo,
   changeVolume,
   toggleFullscreen,
+  toggleMute,
 }: Props) {
   const { state } = usePlayerContext(PContext)
 
@@ -33,7 +34,7 @@ export default function BottomControls({
   return (
     <Wrapper>
       <ProgressBar duration={state.duration} progress={progress} seekTo={seekTo} />
-      <VolumeSlider changeVolume={changeVolume} />
+      <VolumeSlider changeVolume={changeVolume} toggleMute={toggleMute} />
       <FullscreenIcon toggleFullscreen={toggleFullscreen} />
     </Wrapper>
   )
@@ -45,4 +46,5 @@ interface Props {
   changeVolume: (newVol: number) => void
   seekTo: (e: ChangeEvent<HTMLInputElement>) => void
   toggleFullscreen: () => void
+  toggleMute: () => void
 }

@@ -6,7 +6,7 @@ import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import { PContext } from '../../../context/PlayerContext'
 import { getSliderClassName } from '../../../util/style'
 
-export default function VolumeSlider({ changeVolume }: Props) {
+export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [showVolumeSlider, setShowVolumeSlider] = useState(false)
   const { state } = usePlayerContext(PContext)
@@ -34,19 +34,21 @@ export default function VolumeSlider({ changeVolume }: Props) {
           className={`volumeSlider ${getSliderClassName(state.style)}`}
           type='range'
           onChange={setVolume}
+          value={state.currentVolume}
           min={'0'}
           max={'1'}
           step={'0.01'}
           style={{ display: showVolumeSlider ? 'block' : 'none' }}
         />
       </SliderWrapper>
-      <Icon src={'images/volume-icon.png'} />
+      <Icon src={'images/volume-icon.png'} onClick={toggleMute} />
     </Wrapper>
   )
 }
 
 interface Props {
   changeVolume: (newVol: number) => void
+  toggleMute: () => void
 }
 
 const Wrapper = styled.div`

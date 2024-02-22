@@ -36,7 +36,9 @@ export type PlayerProps = {
 export type PlayerContext = {
   state: {
     accentColor?: PlayerProps['accentColor']
+    currentVolume: number
     duration: number
+    previousVolume: number
     viewportWidth: number
     viewportHeight: number
     style: VideoPlayerStyles

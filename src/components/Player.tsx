@@ -156,6 +156,7 @@ const Wrapper = styled.div<{ $isFullscreen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100vh;
 `
 
 const Video = styled.video`

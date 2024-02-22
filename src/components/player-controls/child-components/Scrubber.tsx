@@ -12,7 +12,6 @@ import { usePlayerContext } from "../../../hooks/usePlayerContext";
 import { PContext } from "../../../context/PlayerContext";
 import { getSliderClassName } from "../../../util/style";
 import { secondsToTimestamp } from "../../../util/time";
-import { motion } from "framer-motion";
 
 export default function ProgressBar({ duration, progress, seekTo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,8 +40,7 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
 
   return (
     <Wrapper>
-      <motion.input
-        whileHover={state.style === 2 ? { scaleY: 2 } : undefined}
+      <input
         ref={inputRef}
         className={getSliderClassName(state.style)}
         type="range"

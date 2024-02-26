@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FullscreenCloseIcon, FullscreenOpenIcon } from '../../icons'
+import { FullscreenCloseIcon, FullscreenOpenIcon } from '../icons'
 
 export default function FullscreenIcon({ isFullscreen, toggleFullscreen }: Props) {
   const renderIcon = () => {

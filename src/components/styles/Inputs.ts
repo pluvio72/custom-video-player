@@ -1,64 +1,6 @@
-import { ChangeEvent, MouseEvent, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { usePlayerContext } from '../../../hooks/usePlayerContext'
-import { PContext } from '../../../context/PlayerContext'
-import { getSliderClassName } from '../../../util/style'
-import { secondsToTimestamp } from '../../../util/time'
 
-export default function ProgressBar({ duration, progress, seekTo }: Props) {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { state } = usePlayerContext(PContext)
-  const [labelOffset, setLabelOffset] = useState<number>()
-  const [labelTimestamp, setLabelTimestamp] = useState<number>(0)
-
-  useLayoutEffect(() => {
-    if (inputRef.current) {
-      if (state.accentColor) {
-        inputRef.current.style.color = state.accentColor
-      }
-    }
-  }, [inputRef, state.accentColor])
-
-  const showTooltip = (e: MouseEvent<HTMLInputElement>) => {
-    if (inputRef.current) {
-      const percents = e.clientX / (inputRef.current.offsetWidth + inputRef.current.offsetLeft)
-      const max = parseInt(inputRef.current.max)
-      setLabelTimestamp(Math.floor(percents * max))
-      setLabelOffset(e.clientX - inputRef.current.offsetLeft - 24)
-    }
-  }
-
-  const hideTooltip = () => setLabelOffset(undefined)
-
-  return (
-    <Wrapper>
-      <Input1
-        ref={inputRef}
-        className={getSliderClassName(state.style)}
-        type='range'
-        min='0'
-        max={duration.toString()}
-        value={progress}
-        onChange={seekTo}
-        onMouseMove={showTooltip}
-        onMouseOut={hideTooltip}
-      />
-      <TooptipWrapper $show={!!labelOffset}>
-        <Tooltip $offset={labelOffset}>
-          <TooltipText>{secondsToTimestamp(labelTimestamp)}</TooltipText>
-        </Tooltip>
-      </TooptipWrapper>
-    </Wrapper>
-  )
-}
-
-interface Props {
-  duration: number
-  progress: number
-  seekTo: (e: ChangeEvent<HTMLInputElement>) => void
-}
-
-const Input1 = styled.input`
+export const Input1 = styled.input`
   font-size: 1.5rem;
   width: 100%;
   color: #ef233c;
@@ -202,48 +144,115 @@ const Input1 = styled.input`
   }
 `
 
-const Wrapper = styled.div`
-  width: 90%;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+export const Input2 = styled.input`
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  background: none;
 
-  &::before,
-  &::after {
-    display: block;
-    position: absolute;
-    z-index: 99;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    font-size: 1.5rem;
-    line-height: 1;
-    padding: 0.75rem 0;
-    pointer-events: none;
+  &:focus {
+    outline: none;
   }
-`
 
-const TooptipWrapper = styled.div<{ $show: boolean }>`
-  position: absolute;
-  pointer-events: none;
-  display: ${(props) => (props.$show ? 'block' : 'none')};
-`
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    box-shadow:
+      0px 0px 0px #000000,
+      0px 0px 0px #0d0d0d;
+    background: #f07167;
+    border-radius: 25px;
+    border: 0px solid #111111;
+  }
 
-const Tooltip = styled.div<{ $offset: number | undefined }>`
-  background: #fff;
-  border-radius: 5px;
-  padding: 5px 10px;
-  text-align: left;
-  position: relative;
-  font-size: 0.8rem;
-  max-width: 140px;
-  bottom: 26px;
-  right: ${(props) => (props.$offset ? -props.$offset : 0)}px;
-`
+  &::-webkit-slider-thumb {
+    box-shadow:
+      0px 0px 0px #000000,
+      0px 0px 0px #0d0d0d;
+    border: 0px solid #111111;
+    height: 0px;
+    width: 0px;
+    border-radius: 7px;
+    background: #111111;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -3.6px;
+  }
 
-const TooltipText = styled.span`
-  font-style: italic;
-  font-family: sans-serif;
+  &:focus::-webkit-slider-runnable-track {
+    background: #f07167;
+  }
+
+  &::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow:
+      0px 0px 0px #111111,
+      0px 0px 0px #0d0d0d;
+    background: rgba(0, 0, 0, 0.2);
+    border: 0px solid #111111;
+  }
+
+  &::-moz-range-thumb {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &::-moz-range-progress {
+    background: #f07167;
+    height: 6px;
+  }
+
+  &::-ms-track {
+    width: 100%;
+    height: 6px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    border-width: 39px 0;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    background: #f07167;
+    border: 0px solid #111111;
+    border-radius: 50px;
+    box-shadow:
+      0px 0px 0px #111111,
+      0px 0px 0px #0d0d0d;
+  }
+
+  &::-ms-fill-upper {
+    background: #f07167;
+    border: 0px solid #111111;
+    border-radius: 50px;
+    box-shadow:
+      0px 0px 0px #111111,
+      0px 0px 0px #0d0d0d;
+  }
+
+  &::-ms-thumb {
+    box-shadow:
+      0px 0px 0px #111111,
+      0px 0px 0px #0d0d0d;
+    border: 0px solid #111111;
+    height: 15px;
+    width: 25px;
+    border-radius: 7px;
+    background: #111111;
+    cursor: pointer;
+  }
+
+  &:focus::-ms-fill-lower {
+    background: #f07167;
+  }
+
+  &:focus::-ms-fill-upper {
+    background: #f07167;
+  }
 `

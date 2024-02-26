@@ -1,9 +1,10 @@
 import { ChangeEvent, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { usePlayerContext } from '../../../hooks/usePlayerContext'
-import { PContext } from '../../../context/PlayerContext'
-import { getSliderClassName } from '../../../util/style'
-import { VolumeIcon, VolumeMuteIcon } from '../../icons'
+import { usePlayerContext } from '../../hooks/usePlayerContext'
+import { PContext } from '../../context/PlayerContext'
+import { getSliderClassName } from '../../util/style'
+import { VolumeIcon, VolumeMuteIcon } from '../icons'
+import { Input1 } from '../styles/Inputs'
 
 export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -27,18 +28,18 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
 
   const renderIcon = () => {
     if (state.currentVolume > 0) {
-      return <VolumeIcon onClick={toggleMute} />
+      return <VolumeIcon onClick={toggleMute} width={26} height={26} />
     } else {
-      return <VolumeMuteIcon onClick={toggleMute} />
+      return <VolumeMuteIcon onClick={toggleMute} width={26} height={26} />
     }
   }
 
   return (
     <Wrapper onMouseOver={showSlider} onMouseOut={hideSlider}>
       <SliderWrapper>
-        <input
+        <Input
           ref={inputRef}
-          className={`volumeSlider ${getSliderClassName(state.style)}`}
+          className={getSliderClassName(state.style)}
           type='range'
           onChange={setVolume}
           value={state.currentVolume}
@@ -68,12 +69,14 @@ const Wrapper = styled.div`
   cursor: pointer;
 `
 
-const Icon = styled.img`
-  width: 28px;
-  height: 28px;
-`
-
 const SliderWrapper = styled.div`
   position: absolute;
   bottom: 2rem;
+`
+
+const Input = styled(Input1)`
+  transform: rotate(-90deg);
+  width: 4rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
 `

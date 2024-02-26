@@ -19,7 +19,7 @@ export type PlayerProps = {
   bottomPlayIcon?: ReactNode
   height?: number
   src: string | undefined
-  style: VideoPlayerStyles
+  playerStyle?: VideoPlayerStyles
   videoType?: VideoTypes
   volumeIcon?: ReactNode
   width?: number

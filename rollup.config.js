@@ -1,43 +1,33 @@
-import resolve from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import typescript from '@rollup/plugin-typescript'
-import { terser } from 'rollup-plugin-terser'
-import external from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss'
-import dts from 'rollup-plugin-dts'
+// ./rollup.config.js
+/* eslint-disable @typescript-eslint/no-var-requires */
+const commonjs = require('@rollup/plugin-commonjs')
+const { nodeResolve } = require('@rollup/plugin-node-resolve')
+const typescript = require('rollup-plugin-typescript2')
+const external = require('rollup-plugin-peer-deps-external')
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require('./package.json')
+const pkg = require('./package.json')
 
-export default [
-  {
-    input: 'src/components/index.ts',
-    output: [
-      {
-        file: packageJson.main,
-        format: 'cjs',
-        sourceMap: true,
-        name: 'react-lib',
+const config = {
+  input: ['src/index.ts'],
+  output: [
+    {
+      file: pkg.module,
+      format: 'esm',
+    },
+  ],
+  plugins: [
+    external(),
+    nodeResolve(),
+    typescript(),
+    commonjs({
+      include: /node_modules/,
+      namedExports: {
+        'node_modules/react-js/index.js': ['isValidElementType'],
       },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourceMap: true,
-      },
-    ],
-    plugins: [
-      external(),
-      resolve(),
-      commonjs(),
-      typescript({ tsconfig: './tsconfig.json' }),
-      postcss(),
-      terser(),
-    ],
-  },
-  {
-    input: 'dist/esm/types/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    external: [/\.css$/],
-    plugins: [dts()],
-  },
-]
+    }),
+  ],
+  external: ['react', 'react-dom', 'screenfull'],
+}
+
+// eslint-disable-next-line no-undef
+module.exports = config

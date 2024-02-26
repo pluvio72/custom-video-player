@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useState } from 'react'
+import { PropsWithChildren, createContext, useState } from 'react'
 import { VideoPlayerStyles, type PlayerContext } from '../types'
 
 export const DefaultPlayerState: PlayerContext = {

@@ -1,8 +1,9 @@
+import { FC } from 'react'
 import { PlayerContextProvider } from '../context/PlayerContext'
 import { PlayerProps } from '../types'
 import { Player } from './Player'
 
-const PlayerWrapper = (props: PlayerProps) => (
+const PlayerWrapper: FC<PlayerProps> = (props: PlayerProps) => (
   <PlayerContextProvider
     state={{
       accentColor: props.accentColor,

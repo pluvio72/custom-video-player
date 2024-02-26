@@ -1,5 +1,22 @@
-import React from 'react'
 import styled from 'styled-components'
+import { FullscreenCloseIcon, FullscreenOpenIcon } from '../../icons'
+
+export default function FullscreenIcon({ isFullscreen, toggleFullscreen }: Props) {
+  const renderIcon = () => {
+    if (isFullscreen) {
+      return <FullscreenCloseIcon height={26} width={26} />
+    } else {
+      return <FullscreenOpenIcon height={26} width={26} />
+    }
+  }
+
+  return <Wrapper onClick={toggleFullscreen}>{renderIcon()}</Wrapper>
+}
+
+interface Props {
+  isFullscreen: boolean
+  toggleFullscreen: () => void
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,20 +26,3 @@ const Wrapper = styled.div`
   margin-right: 0.5rem;
   cursor: pointer;
 `
-
-const Icon = styled.img`
-  width: 26px;
-  height: 26px;
-`
-
-export default function FullscreenIcon({ toggleFullscreen }: Props) {
-  return (
-    <Wrapper onClick={toggleFullscreen}>
-      <Icon src={'images/fullscreen-icon.png'} />
-    </Wrapper>
-  )
-}
-
-interface Props {
-  toggleFullscreen: () => void
-}

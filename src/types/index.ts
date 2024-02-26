@@ -20,7 +20,7 @@ export type PlayerProps = {
   height?: number
   src: string | undefined
   style: VideoPlayerStyles
-  videoType: VideoTypes
+  videoType?: VideoTypes
   volumeIcon?: ReactNode
   width?: number
   bottomControls?: (
@@ -47,4 +47,11 @@ export type PlayerContext = {
     style: VideoPlayerStyles
   }
   setState: React.Dispatch<React.SetStateAction<PlayerContext['state']>>
+}
+
+export interface IconProps {
+  height?: number
+  width?: number
+  viewbox?: string
+  onClick?: () => void
 }

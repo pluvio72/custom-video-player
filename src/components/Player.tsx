@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import PlayerControls from './player-controls/PlayerControls'
 import styled from 'styled-components'
-import { PlayerProps } from '../types'
+import { PlayerProps, VideoTypes } from '../types'
 import { PContext } from '../context/PlayerContext'
 import MidControls from './player-controls/MidControls'
 import BottomControls from './player-controls/BottomControls'
@@ -12,7 +12,7 @@ import TopControls from './player-controls/TopControls'
 export function Player({
   height,
   src,
-  videoType,
+  videoType = VideoTypes.mp4,
   width,
   bottomControls,
   midControls,
@@ -25,6 +25,12 @@ export function Player({
   const [currentTime, setCurrentTime] = useState(playerRef.current?.currentTime || 0)
 
   const { state, setState } = usePlayerContext(PContext)
+
+  useEffect(() => {
+    screenfull.onchange((e) => {
+      console.log(e)
+    })
+  }, [screenfull])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -130,7 +136,13 @@ export function Player({
   }
 
   return (
-    <Wrapper ref={playerWrapperRef} id='player' $isFullscreen={state.isFullscreen}>
+    <Wrapper
+      ref={playerWrapperRef}
+      id='player'
+      $isFullscreen={state.isFullscreen}
+      $width={width}
+      $height={height}
+    >
       <PlayerControls playerRef={playerRef} wrapperRef={playerWrapperRef}>
         <TopControls topControls={topControls} />
         <MidControls midControls={midControls} playing={playing} togglePlayState={togglePlaying} />
@@ -143,16 +155,16 @@ export function Player({
           toggleMute={toggleMute}
         />
       </PlayerControls>
-      <Video ref={playerRef} width={width} height={height} onLoadedMetadata={onLoad}>
+      <Video ref={playerRef} onLoadedMetadata={onLoad}>
         <source src={src} type={videoType} />
       </Video>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.div<{ $isFullscreen: boolean }>`
-  width: 100%;
-  height: ${(props) => (props.$isFullscreen ? '100vh' : '')};
+const Wrapper = styled.div<{ $isFullscreen: boolean; $width?: number; $height?: number }>`
+  width: ${(props) => (props.$isFullscreen ? '100%' : props.$width ? `${props.$width}px` : '100%')};
+  height: ${(props) => (props.$isFullscreen ? '100vh' : props.$height ? `${props.$height}px` : '')};
   display: flex;
   justify-content: center;
   align-items: center;

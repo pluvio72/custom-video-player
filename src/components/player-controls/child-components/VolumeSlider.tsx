@@ -1,10 +1,9 @@
-import './VolumeSlider.css'
-
 import { ChangeEvent, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import { PContext } from '../../../context/PlayerContext'
 import { getSliderClassName } from '../../../util/style'
+import { VolumeIcon, VolumeMuteIcon } from '../../icons'
 
 export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -26,6 +25,14 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
     changeVolume(Number(e.currentTarget.value))
   }
 
+  const renderIcon = () => {
+    if (state.currentVolume > 0) {
+      return <VolumeIcon onClick={toggleMute} />
+    } else {
+      return <VolumeMuteIcon onClick={toggleMute} />
+    }
+  }
+
   return (
     <Wrapper onMouseOver={showSlider} onMouseOut={hideSlider}>
       <SliderWrapper>
@@ -41,7 +48,7 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
           style={{ display: showVolumeSlider ? 'block' : 'none' }}
         />
       </SliderWrapper>
-      <Icon src={'images/volume-icon.png'} onClick={toggleMute} />
+      {renderIcon()}
     </Wrapper>
   )
 }

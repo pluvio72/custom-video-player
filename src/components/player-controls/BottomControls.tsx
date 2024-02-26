@@ -42,7 +42,7 @@ export default function BottomControls({
     <Wrapper>
       <ProgressBar duration={state.duration} progress={progress} seekTo={seekTo} />
       <VolumeSlider changeVolume={changeVolume} toggleMute={toggleMute} />
-      <FullscreenIcon toggleFullscreen={toggleFullscreen} />
+      <FullscreenIcon toggleFullscreen={toggleFullscreen} isFullscreen={state.isFullscreen} />
     </Wrapper>
   )
 }

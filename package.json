@@ -7,6 +7,8 @@
   "files": [
     "dist"
   ],
+  "author": "pluvio72",
+  "homepage": "https://github.com/pluvio72/custom-video-player",
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -74,5 +76,15 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-serve": "^1.1.1",
     "rollup-plugin-typescript2": "^0.36.0"
-  }
+  },
+  "keywords": [
+    "react",
+    "media",
+    "player",
+    "custom",
+    "customizable",
+    "video",
+    "react-component",
+    "video-player"
+  ]
 }

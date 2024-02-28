@@ -19,12 +19,7 @@ const config = {
     external(),
     typescript(),
     // nodeResolve(),
-    // commonjs({
-    //   include: /node_modules/,
-    //   namedExports: {
-    //     'node_modules/react-js/index.js': ['isValidElementType'],
-    //   },
-    // }),
+    // commonjs(),
   ],
   external: ['react', 'react-dom'],
 }

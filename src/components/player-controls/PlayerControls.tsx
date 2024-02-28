@@ -43,6 +43,7 @@ export default function PlayerControls({
     if (!videoEl) return
 
     const handleResize = () => setDimensions(videoEl)
+
     handleResize()
 
     window.addEventListener('resize', handleResize)
@@ -58,12 +59,10 @@ export default function PlayerControls({
   }, [state.viewportHeight, state.viewportWidth])
 
   const setDimensions = (el: HTMLVideoElement) => {
-    const boundingRect = el.getBoundingClientRect()
-
     setState((prev) => ({
       ...prev,
-      viewportHeight: boundingRect.height,
-      viewportWidth: boundingRect.width,
+      viewportHeight: el.clientHeight,
+      viewportWidth: el.clientWidth,
     }))
   }
 

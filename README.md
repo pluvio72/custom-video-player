@@ -27,3 +27,57 @@ return (
 )
 
 ```
+
+## Customize
+
+The props used to customize the player are:
+
+- `bottomControls`
+  - Changes the controls at the bottom of the player
+- `midControls`
+  - Changes controls in the center e.g. large play/pause button
+- `topControls`
+  - Any extra controls you want on the top e.g. video name etc.
+
+You can also customize the finer details:
+
+- `volumeIcon`
+- `accentColor`
+
+## Props in depth
+
+#### `bottomControls`
+
+Usage as follow:
+
+```javascript
+<Player
+  bottomControls={(progress, duration, seekTo, changeVolume, toggleFullscreen, toggleMute) => {
+    // Render your components here
+  }}
+/>
+```
+
+#### `midControls`
+
+Usage:
+
+```javascript
+<Player
+  midControls={(playing, togglePlayState) => {
+    // Render your components here
+  }}
+/>
+```
+
+#### `topControls`
+
+Usage:
+
+```javascript
+<Player
+  topControls={() => {
+    // Render your components here
+  }}
+/>
+```

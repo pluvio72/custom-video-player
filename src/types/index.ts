@@ -16,7 +16,6 @@ export enum VideoPlayerStyles {
 
 export type PlayerProps = {
   accentColor?: string
-  bottomPlayIcon?: ReactNode
   height?: number
   src: string | undefined
   playerStyle?: VideoPlayerStyles

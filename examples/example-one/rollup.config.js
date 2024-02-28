@@ -6,6 +6,7 @@ const babel = require('@rollup/plugin-babel')
 const commonjs = require('@rollup/plugin-commonjs')
 const nodeResolve = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
+const livereload = require('rollup-plugin-livereload')
 
 const config = {
   input: ['./examples/example-one/index.tsx'],
@@ -16,6 +17,7 @@ const config = {
     },
   ],
   plugins: [
+    livereload(),
     commonjs(),
     nodeResolve(),
     typescript(),

@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 import { IconProps } from '../../types'
+import styled from 'styled-components'
 
 export const Icon: FC<PropsWithChildren<IconProps>> = ({
   children,
@@ -9,8 +10,12 @@ export const Icon: FC<PropsWithChildren<IconProps>> = ({
   onClick,
 }) => {
   return (
-    <svg viewBox={viewbox} width={width} height={height} version='1.1' onClick={onClick}>
+    <Svg viewBox={viewbox} width={width} height={height} version='1.1' onClick={onClick}>
       {children}
-    </svg>
+    </Svg>
   )
 }
+
+const Svg = styled.svg`
+  cursor: pointer;
+`

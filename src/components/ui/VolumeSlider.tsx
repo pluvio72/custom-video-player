@@ -71,7 +71,7 @@ const Wrapper = styled.div`
 
 const SliderWrapper = styled.div`
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
 `
 
 const Input = styled(Input1)`

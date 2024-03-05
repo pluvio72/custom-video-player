@@ -2,7 +2,7 @@
 
 This project aims to enable you to build a customize the visuals of a native HTML video player in react.
 
-If you would like to request features open an [issue](https://test.com), or even better open a PR. If you have questions or need help please ask in [Github Discussions]().
+If you would like to request features open an [issue](https://github.com/pluvio72/custom-video-player/issues), or even better open a PR. If you have questions or need help please ask in [Github Discussions](https://github.com/pluvio72/custom-video-player/discussions).
 
 ## Get started
 
@@ -93,4 +93,3 @@ Usage:
 ## What is looks like
 
 https://github.com/pluvio72/custom-video-player/assets/39244972/edf1a9ba-6a97-4379-b03d-7d10889a23ef
-

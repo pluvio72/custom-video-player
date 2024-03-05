@@ -3,7 +3,7 @@ import { IconProps } from '../../types'
 import { Icon } from './Icon'
 
 export const PlayIcon: FC<IconProps> = (props) => (
-  <Icon {...props} viewbox='-3 0 28 28'>
+  <Icon {...props} viewbox='-5 0 28 28'>
     <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
       <g transform='translate(-419.000000, -571.000000)' fill='#FFFFFF'>
         <path

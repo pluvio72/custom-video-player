@@ -14,6 +14,8 @@ or
 npm install custom-react-player
 ```
 
+(TS support is natively included)
+
 Once installed you can use it in your code:
 
 ```javascript

@@ -34,6 +34,8 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
   return (
     <Wrapper>
       <Input1
+        animate={{ opacity: state.volumeSliderOpen ? 0 : 1 }}
+        transition={{ duration: 0.15 }}
         ref={inputRef}
         className={getSliderClassName(state.style)}
         type='range'
@@ -60,12 +62,10 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  width: 90%;
-  height: 3rem;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
 
   &::before,
   &::after {

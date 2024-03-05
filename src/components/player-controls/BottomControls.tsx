@@ -6,16 +6,7 @@ import { PlayerProps } from '../../types'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 import { PContext } from '../../context/PlayerContext'
 import { ChangeEvent } from 'react'
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  margin-top: auto;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-`
+import PlayButton from '@components/ui/PlayButton'
 
 export default function BottomControls({
   progress,
@@ -24,6 +15,7 @@ export default function BottomControls({
   changeVolume,
   toggleFullscreen,
   toggleMute,
+  togglePlay,
 }: Props) {
   const { state } = usePlayerContext(PContext)
 
@@ -35,14 +27,20 @@ export default function BottomControls({
       changeVolume,
       toggleFullscreen,
       toggleMute,
+      togglePlay,
     )
   }
 
   return (
     <Wrapper>
       <ProgressBar duration={state.duration} progress={progress} seekTo={seekTo} />
-      <VolumeSlider changeVolume={changeVolume} toggleMute={toggleMute} />
-      <FullscreenIcon toggleFullscreen={toggleFullscreen} isFullscreen={state.isFullscreen} />
+      <BottomWrapper>
+        <PlayButtonWrapper>
+          <PlayButton playing={state.playing} togglePlay={togglePlay} />
+        </PlayButtonWrapper>
+        <VolumeSlider changeVolume={changeVolume} toggleMute={toggleMute} />
+        <FullscreenIcon toggleFullscreen={toggleFullscreen} isFullscreen={state.isFullscreen} />
+      </BottomWrapper>
     </Wrapper>
   )
 }
@@ -54,4 +52,29 @@ interface Props {
   seekTo: (e: ChangeEvent<HTMLInputElement>) => void
   toggleFullscreen: () => void
   toggleMute: () => void
+  togglePlay: () => void
 }
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-rows: 100% 100%;
+  margin-top: auto;
+  width: 95%;
+  margin-right: 10px;
+  margin-left: 10px;
+`
+
+const BottomWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 15px;
+  margin-left: auto;
+  width: 100%;
+`
+
+const PlayButtonWrapper = styled.div`
+  margin-right: auto;
+  padding-left: 5px;
+  display: grid;
+  place-items: center;
+`

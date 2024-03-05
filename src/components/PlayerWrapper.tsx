@@ -12,6 +12,8 @@ const PlayerWrapper: FC<PlayerProps> = (props: PlayerProps) => (
       isFullscreen: false,
       style: props.playerStyle || VideoPlayerStyles.one,
       previousVolume: 1,
+      playing: false,
+      volumeSliderOpen: false,
       viewportHeight: 0,
       viewportWidth: 0,
     }}

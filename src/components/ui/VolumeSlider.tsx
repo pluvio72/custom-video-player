@@ -9,7 +9,7 @@ import { Input1 } from '../styles/Inputs'
 export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [showVolumeSlider, setShowVolumeSlider] = useState(false)
-  const { state } = usePlayerContext(PContext)
+  const { state, setState } = usePlayerContext(PContext)
 
   useLayoutEffect(() => {
     if (inputRef.current) {
@@ -19,8 +19,21 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
     }
   }, [inputRef])
 
-  const showSlider = () => setShowVolumeSlider(true)
-  const hideSlider = () => setShowVolumeSlider(false)
+  const onMouseOverSlider = () => {
+    setShowVolumeSlider(true)
+    setState((prev) => ({
+      ...prev,
+      volumeSliderOpen: true,
+    }))
+  }
+
+  const onMouseLeaveSlider = () => {
+    setShowVolumeSlider(false)
+    setState((prev) => ({
+      ...prev,
+      volumeSliderOpen: false,
+    }))
+  }
 
   const setVolume = (e: ChangeEvent<HTMLInputElement>) => {
     changeVolume(Number(e.currentTarget.value))
@@ -35,7 +48,7 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
   }
 
   return (
-    <Wrapper onMouseOver={showSlider} onMouseOut={hideSlider}>
+    <Wrapper onMouseOver={onMouseOverSlider} onMouseOut={onMouseLeaveSlider}>
       <SliderWrapper>
         <Input
           ref={inputRef}
@@ -79,4 +92,5 @@ const Input = styled(Input1)`
   width: 4rem;
   margin-bottom: 1.5rem;
   padding-left: 1rem;
+  cursor: pointer;
 `

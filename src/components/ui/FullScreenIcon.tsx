@@ -23,6 +23,5 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 0.5rem;
-  margin-right: 0.5rem;
   cursor: pointer;
 `

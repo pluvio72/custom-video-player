@@ -1,12 +1,13 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Input1 = styled.input`
+export const Input1 = styled(motion.input)`
   font-size: 1.5rem;
   width: 100%;
   color: #ef233c;
   --thumb-height: 0.7em;
   --track-height: 0.125em;
-  --track-color: rgba(0, 0, 0, 0.2);
+  --track-color: rgba(200, 200, 200, 0.4);
   --brightness-hover: 180%;
   --brightness-down: 80%;
   --clip-edges: 0.125em;

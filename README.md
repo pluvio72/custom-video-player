@@ -52,7 +52,15 @@ Usage as follow:
 
 ```javascript
 <Player
-  bottomControls={(progress, duration, seekTo, changeVolume, toggleFullscreen, toggleMute) => {
+  bottomControls={(
+    progress,
+    duration,
+    seekTo,
+    changeVolume,
+    toggleFullscreen,
+    toggleMute,
+    togglePlay,
+  ) => {
     // Render your components here
   }}
 />

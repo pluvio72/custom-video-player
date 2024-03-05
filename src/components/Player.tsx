@@ -21,7 +21,6 @@ export function Player({
   const playerRef = useRef<HTMLVideoElement>(null)
   const playerWrapperRef = useRef<HTMLDivElement>(null)
 
-  const [playing, setPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(playerRef.current?.currentTime || 0)
 
   const { state, setState } = usePlayerContext(PContext)
@@ -34,13 +33,13 @@ export function Player({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (playing) {
+      if (state.playing) {
         setCurrentTime(Math.floor(playerRef.current?.currentTime || 0))
       }
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [playing])
+  }, [state.playing])
 
   useLayoutEffect(() => {
     if (playerRef.current) {
@@ -53,12 +52,18 @@ export function Player({
   }, [])
 
   const togglePlaying = () => {
-    if (playing) {
+    if (state.playing) {
       playerRef.current?.pause()
-      setPlaying(false)
+      setState((prev) => ({
+        ...prev,
+        playing: false,
+      }))
     } else {
       playerRef.current?.play()
-      setPlaying(true)
+      setState((prev) => ({
+        ...prev,
+        playing: true,
+      }))
     }
   }
 
@@ -145,7 +150,11 @@ export function Player({
     >
       <PlayerControls playerRef={playerRef} wrapperRef={playerWrapperRef}>
         <TopControls topControls={topControls} />
-        <MidControls midControls={midControls} playing={playing} togglePlayState={togglePlaying} />
+        <MidControls
+          midControls={midControls}
+          playing={state.playing}
+          togglePlayState={togglePlaying}
+        />
         <BottomControls
           bottomControls={bottomControls}
           progress={currentTime}
@@ -153,6 +162,7 @@ export function Player({
           changeVolume={changeVolume}
           toggleFullscreen={toggleFullscreen}
           toggleMute={toggleMute}
+          togglePlay={togglePlaying}
         />
       </PlayerControls>
       <Video ref={playerRef} onLoadedMetadata={onLoad}>

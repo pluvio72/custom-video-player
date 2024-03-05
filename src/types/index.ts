@@ -29,6 +29,7 @@ export type PlayerProps = {
     changeVolume: (newVolume: number) => void,
     toggleFullscreen: () => void,
     toggleMute: () => void,
+    togglePlay: () => void,
   ) => JSX.Element
   midControls?: (playing: boolean, togglePlayState: () => void) => JSX.Element
   topControls?: () => JSX.Element
@@ -40,10 +41,12 @@ export type PlayerContext = {
     currentVolume: number
     duration: number
     isFullscreen: boolean
+    playing: boolean
     previousVolume: number
     viewportWidth: number
     viewportHeight: number
     style: VideoPlayerStyles
+    volumeSliderOpen: boolean
   }
   setState: React.Dispatch<React.SetStateAction<PlayerContext['state']>>
 }

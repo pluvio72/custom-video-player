@@ -89,3 +89,8 @@ Usage:
   }}
 />
 ```
+
+## What is looks like
+
+https://github.com/pluvio72/custom-video-player/assets/39244972/edf1a9ba-6a97-4379-b03d-7d10889a23ef
+

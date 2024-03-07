@@ -45,6 +45,8 @@ You can also customize the finer details:
 
 - `volumeIcon`
 - `accentColor`
+- `width`
+- `height`
 
 ## Props in depth
 

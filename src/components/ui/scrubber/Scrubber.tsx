@@ -2,7 +2,6 @@ import { ChangeEvent, MouseEvent, useLayoutEffect, useRef, useState } from 'reac
 import styled from 'styled-components'
 import { usePlayerContext } from '../../../hooks/usePlayerContext'
 import { PContext } from '../../../context/PlayerContext'
-import { getSliderClassName } from '../../../util/style'
 import { secondsToTimestamp } from '../../../util/time'
 import { Input1 } from '../../styles/Inputs'
 
@@ -37,10 +36,9 @@ export default function ProgressBar({ duration, progress, seekTo }: Props) {
         animate={{ opacity: state.volumeSliderOpen ? 0 : 1 }}
         transition={{ duration: 0.15 }}
         ref={inputRef}
-        className={getSliderClassName(state.style)}
         type='range'
         min='0'
-        max={duration.toString()}
+        max={Math.ceil(duration).toString()}
         value={progress}
         onChange={seekTo}
         onMouseMove={showTooltip}

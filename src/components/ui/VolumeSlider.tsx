@@ -2,7 +2,6 @@ import { ChangeEvent, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { usePlayerContext } from '../../hooks/usePlayerContext'
 import { PContext } from '../../context/PlayerContext'
-import { getSliderClassName } from '../../util/style'
 import { VolumeIcon, VolumeMuteIcon } from '../icons'
 import { Input1 } from '../styles/Inputs'
 
@@ -52,7 +51,6 @@ export default function VolumeSlider({ changeVolume, toggleMute }: Props) {
       <SliderWrapper>
         <Input
           ref={inputRef}
-          className={getSliderClassName(state.style)}
           type='range'
           onChange={setVolume}
           value={state.currentVolume}

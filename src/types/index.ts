@@ -9,16 +9,10 @@ export enum VideoTypes {
   mp4 = 'video/mp4',
 }
 
-export enum VideoPlayerStyles {
-  'one' = 1,
-  'two' = 2,
-}
-
 export type PlayerProps = {
   accentColor?: string
   height?: number
   src: string | undefined
-  playerStyle?: VideoPlayerStyles
   videoType?: VideoTypes
   volumeIcon?: ReactNode
   width?: number
@@ -45,7 +39,6 @@ export type PlayerContext = {
     previousVolume: number
     viewportWidth: number
     viewportHeight: number
-    style: VideoPlayerStyles
     volumeSliderOpen: boolean
   }
   setState: React.Dispatch<React.SetStateAction<PlayerContext['state']>>

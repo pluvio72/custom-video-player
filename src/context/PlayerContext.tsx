@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useState } from 'react'
-import { VideoPlayerStyles, type PlayerContext } from '../types'
+import { type PlayerContext } from '../types'
 
 export const DefaultPlayerState: PlayerContext = {
   state: {
@@ -7,7 +7,6 @@ export const DefaultPlayerState: PlayerContext = {
     currentVolume: 1,
     duration: 0,
     isFullscreen: false,
-    style: VideoPlayerStyles.one,
     playing: false,
     previousVolume: 0,
     volumeSliderOpen: false,

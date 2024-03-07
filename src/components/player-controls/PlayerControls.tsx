@@ -43,7 +43,6 @@ export default function PlayerControls({
     if (!videoEl) return
 
     const handleResize = () => setDimensions(videoEl)
-
     handleResize()
 
     window.addEventListener('resize', handleResize)

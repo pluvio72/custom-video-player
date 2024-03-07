@@ -2,7 +2,7 @@
 
 This project aims to enable you to build a customize the visuals of a native HTML video player in react.
 
-If you would like to request features open an [issue](https://github.com/pluvio72/custom-video-player/issues), or even better open a PR. If you have questions or need help please ask in [Github Discussions](https://github.com/pluvio72/custom-video-player/discussions).
+If you would like to request features open an [issue](https://github.com/pluvio72/custom-video-player/issues), or even better open a PR. If you have questions or need help please ask in [Github Discussions](https://github.com/pluvio72/custom-video-player/discussions)!
 
 ## Get started
 
@@ -90,6 +90,17 @@ Usage:
     // Render your components here
   }}
 />
+```
+
+## Notes
+
+To make sure fullscreen works correctly you must set your `<body>` to have margin/padding of 0:
+
+```css
+body {
+  padding: 0;
+  margin: 0;
+}
 ```
 
 ## What is looks like

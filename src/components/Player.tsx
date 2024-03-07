@@ -25,9 +25,13 @@ export function Player({
 
   const { state, setState } = usePlayerContext(PContext)
 
+  // Setting state in here as pressing `esc` needs to trigger state updates too
   useEffect(() => {
-    screenfull.onchange((e) => {
-      console.log(e)
+    screenfull.onchange(() => {
+      setState((prev) => ({
+        ...prev,
+        isFullscreen: !prev.isFullscreen,
+      }))
     })
   }, [screenfull])
 
@@ -110,19 +114,11 @@ export function Player({
 
   const toggleFullscreen = () => {
     if (screenfull.isEnabled) {
-      let isFullscreen = false
-
       if (screenfull.isFullscreen) {
         screenfull.exit()
       } else {
         screenfull.request()
-        isFullscreen = true
       }
-
-      setState((prev) => ({
-        ...prev,
-        isFullscreen,
-      }))
     }
   }
 
@@ -179,6 +175,7 @@ const Wrapper = styled.div<{ $isFullscreen: boolean; $width?: number; $height?: 
   justify-content: center;
   align-items: center;
   max-height: 100vh;
+  background-color: ${(props) => (props.$isFullscreen ? 'black' : '')};
 `
 
 const Video = styled.video`

@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import PlayerControls from './player-controls/PlayerControls'
 import styled from 'styled-components'
-import { PlayerProps, VideoTypes } from '../types'
+import { PlayerProps } from '../types'
 import { PContext } from '../context/PlayerContext'
 import MidControls from './player-controls/MidControls'
 import BottomControls from './player-controls/BottomControls'
@@ -12,7 +12,7 @@ import TopControls from './player-controls/TopControls'
 export function Player({
   height,
   src,
-  videoType = VideoTypes.mp4,
+  videoType = 'mp4',
   width,
   bottomControls,
   midControls,
@@ -162,7 +162,7 @@ export function Player({
         />
       </PlayerControls>
       <Video ref={playerRef} onLoadedMetadata={onLoad}>
-        <source src={src} type={videoType} />
+        <source src={src} type={`video/${videoType}`} />
       </Video>
     </Wrapper>
   )

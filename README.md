@@ -43,12 +43,12 @@ The props used to customize the player are:
 
 You can also customize the finer details:
 
-- `volumeIcon`
-- `accentColor`
-- `width`
-- `height`
-- `src`
-- `videoType`
+- `volumeIcon:JSX.Element`
+- `accentColor:color`
+- `width:number`
+- `height:number`
+- `src:string`
+- `videoType: 'mp4' | 'ogg' | 'webm'`
 
 ## Props in depth
 

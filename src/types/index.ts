@@ -5,9 +5,7 @@ export type VideoDimensionInfo = {
   height: number
 }
 
-export enum VideoTypes {
-  mp4 = 'video/mp4',
-}
+export type VideoTypes = 'mp4' | 'ogg' | 'webm'
 
 export type PlayerProps = {
   accentColor?: string

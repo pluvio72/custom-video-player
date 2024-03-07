@@ -47,6 +47,8 @@ You can also customize the finer details:
 - `accentColor`
 - `width`
 - `height`
+- `src`
+- `videoType`
 
 ## Props in depth
 

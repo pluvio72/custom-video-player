@@ -14,6 +14,8 @@ export const Input1 = styled(motion.input)`
   position: relative;
   background: #fff0;
   overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
 
   &:active {
@@ -28,6 +30,8 @@ export const Input1 = styled(motion.input)`
 
   &::-moz-range-track,
   &::-moz-range-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     transition: all ease 100ms;
     height: var(--thumb-height);
@@ -57,6 +61,8 @@ export const Input1 = styled(motion.input)`
   }
 
   &::-moz-range-progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     background: currentColor;
     transition-delay: 30ms;
@@ -90,6 +96,8 @@ export const Input1 = styled(motion.input)`
   &::-webkit-slider-runnable-track,
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     transition: all ease 100ms;
     height: var(--thumb-height);
   }
@@ -148,6 +156,8 @@ export const Input1 = styled(motion.input)`
 
 export const Input2 = styled.input`
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   margin: 10px 0;
   width: 100%;
   background: none;

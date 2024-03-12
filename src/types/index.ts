@@ -8,6 +8,7 @@ export type VideoDimensionInfo = {
 export type VideoTypes = 'mp4' | 'ogg' | 'webm'
 
 export type PlayerProps = {
+  autoplay?: boolean
   accentColor?: string
   height?: number
   src: string | undefined

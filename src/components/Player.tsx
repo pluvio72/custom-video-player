@@ -10,6 +10,7 @@ import { usePlayerContext } from '../hooks/usePlayerContext'
 import TopControls from './player-controls/TopControls'
 
 export function Player({
+  autoplay,
   height,
   src,
   videoType = 'mp4',
@@ -24,6 +25,11 @@ export function Player({
   const [currentTime, setCurrentTime] = useState(playerRef.current?.currentTime || 0)
 
   const { state, setState } = usePlayerContext(PContext)
+
+  // Update when new src
+  useEffect(() => {
+    setCurrentTime(0)
+  }, [src])
 
   // Setting state in here as pressing `esc` needs to trigger state updates too
   useEffect(() => {
@@ -161,7 +167,7 @@ export function Player({
           togglePlay={togglePlaying}
         />
       </PlayerControls>
-      <Video ref={playerRef} onLoadedMetadata={onLoad}>
+      <Video ref={playerRef} onLoadedMetadata={onLoad} autoPlay={autoplay}>
         <source src={src} type={`video/${videoType}`} />
       </Video>
     </Wrapper>

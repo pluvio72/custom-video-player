@@ -14,6 +14,7 @@ export const Input1 = styled(motion.input)`
   position: relative;
   background: #fff0;
   overflow: hidden;
+  appearance: none;
 
   &:active {
     cursor: grabbing;

@@ -57,7 +57,7 @@ interface Props {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: 100% 100%;
+  grid-template-rows: 50% 50%;
   margin-top: auto;
   width: 95%;
   margin-right: 10px;
